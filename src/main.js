@@ -22,7 +22,7 @@ document.querySelector('#app').innerHTML = `
     <main>
       <section class="hero">
         <h2>Welcome to My Science World!</h2>
-        <p>I'm a 12-year-old science enthusiast yo yo sharing my projects and experiments.</p>
+        <p>I'm a 12-year-old science enthusiast sharing my projects and experiments.</p>
       </section>
       
       <section class="featured">
