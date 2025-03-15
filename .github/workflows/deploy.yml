@@ -1,18 +1,14 @@
-   name: Deploy Website
-   on:
-     push:
-       branches: [ main ]
-   jobs:
-     deploy:
-       runs-on: ubuntu-latest
-       steps:
-         - name: Deploy via SSH
-           uses: appleboy/ssh-action@v0.1.7
-           with:
-             host: ${{ secrets.HOST_IP }}
-             port: ${{ secrets.SSH_PORT }}
-             username: deploy
-             key: ${{ secrets.DEPLOY_KEY }}
-             script: |
-               cd /var/www/axel.jefahnierocks.com
-               git pull
+name: Deploy Axel's MyLair Site
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    uses: verlyn13/kids-deploy-actions/.github/workflows/deploy.yml@main
+    with:
+      build_command: 'pnpm install && pnpm run build'
+      build_output_dir: 'dist'
+      remote_target_dir: '/var/www/kidsites/axel'
+    secrets: inherit
