@@ -38,7 +38,7 @@ echo -e "${NC}"
 handle_error() {
   echo -e "${RED}🧪 EXPERIMENT FAILED: $1${NC}"
   echo -e "${YELLOW}🧬 Returning to original branch...${NC}"
-  git checkout "$original_branch"
+  git checkout "$START_BRANCH"
   exit 1
 }
 
@@ -110,6 +110,14 @@ if [ ! -d dist ]; then
 fi
 show_success "Eureka! Build synthesized successfully"
 
+# Save the dist directory to a temporary location
+show_status "Preserving experimental results in quantum storage"
+echo -e "${YELLOW}🧮 Backing up build artifacts to quantum buffer...${NC}"
+# Create a temporary directory for the dist contents
+mkdir -p /tmp/science-deploy-temp
+cp -r dist/* /tmp/science-deploy-temp/ || handle_error "Failed to backup experimental data"
+show_success "Experimental data safely preserved in quantum buffer"
+
 # Checkout or create deploy branch
 if git show-ref --verify --quiet refs/heads/deploy; then
   show_status "Teleporting to deploy dimension"
@@ -124,11 +132,17 @@ fi
 # Clean root (except .git)
 show_status "Sterilizing laboratory environment"
 echo -e "${YELLOW}🧹 Cleaning up workspace for optimal experiment conditions...${NC}"
-find . -maxdepth 1 ! -name '.git' ! -name '.' ! -name 'dist' -exec rm -rf {} +
+find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
 
-# Move build files into root directory
-show_status "Transferring experimental results to observation chamber"
-cp -r dist/* . || handle_error "Failed to transfer experimental data. Check your microscope (file system)."
+# Move build files from temporary location to root directory
+show_status "Transferring experimental results from quantum buffer to observation chamber"
+if [ -d /tmp/science-deploy-temp ] && [ "$(ls -A /tmp/science-deploy-temp)" ]; then
+  cp -r /tmp/science-deploy-temp/* . || handle_error "Failed to transfer experimental data from quantum buffer"
+  rm -rf /tmp/science-deploy-temp  # Clean up temporary directory
+  show_success "Experimental data successfully materialized in deploy dimension"
+else
+  handle_error "Quantum buffer is empty or corrupted! Check your experimental procedure."
+fi
 
 # Add, commit, and push deploy branch
 show_status "Documenting experimental results"
