@@ -1,12 +1,8 @@
-import './style.css'
-// For files in the public folder, we reference them directly
-const atomLogo = '/images/atom.svg'
-
-document.querySelector('#app').innerHTML = `
+(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))o(e);new MutationObserver(e=>{for(const r of e)if(r.type==="childList")for(const i of r.addedNodes)i.tagName==="LINK"&&i.rel==="modulepreload"&&o(i)}).observe(document,{childList:!0,subtree:!0});function s(e){const r={};return e.integrity&&(r.integrity=e.integrity),e.referrerPolicy&&(r.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?r.credentials="include":e.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function o(e){if(e.ep)return;e.ep=!0;const r=s(e);fetch(e.href,r)}})();const c="/images/atom.svg";document.querySelector("#app").innerHTML=`
   <div class="container">
     <header>
       <div class="logo-container">
-        <img src="${atomLogo}" class="logo" alt="Atom logo" />
+        <img src="${c}" class="logo" alt="Atom logo" />
         <h1>Science Projects</h1>
       </div>
       <nav>
@@ -54,4 +50,4 @@ document.querySelector('#app').innerHTML = `
       <p>© 2025 Science Projects - Made with 💡 and curiosity</p>
     </footer>
   </div>
-`
+`;
