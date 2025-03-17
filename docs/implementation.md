@@ -174,30 +174,64 @@ Proper documentation is essential for maintenance and collaboration. Your README
 
 ---
 
-## 9. Commit and Push Your Changes
+## 9. Commit, Push, and Deploy Your Changes
 
-Using Git for version control ensures your changes are tracked and shared properly.
+Using Git for version control ensures your changes are tracked and shared properly. The automated deployment script simplifies the process of building and deploying your site.
 
-1. **Check the Status**  
+### 9A. Manual Git Operations
+
+1. **Check the Status**
    ```bash
    git status
    ```
 
-2. **Stage Your Changes**  
+2. **Stage Your Changes**
    ```bash
    git add .
    ```
 
-3. **Commit with a Descriptive Message**  
+3. **Commit with a Descriptive Message**
    ```bash
    git commit -m "Set up Vite project with pnpm and document environment"
    ```
 
-4. **Push to GitHub**  
+4. **Push to GitHub**
    ```bash
    git push origin main
    ```
    - (If your default branch is `master`, replace `main` with `master`.)
+
+### 9B. Automated Deployment with deploy.sh
+
+For a streamlined workflow, use the `deploy.sh` script to automate the commit, build, and deployment process:
+
+1. **Make the Script Executable** (first time only)
+   ```bash
+   chmod +x deploy.sh
+   ```
+
+2. **Run the Deployment Script**
+   ```bash
+   ./deploy.sh
+   ```
+
+3. **What the Script Does:**
+   - Commits and pushes changes to the `main` branch
+   - Installs dependencies and builds the site locally
+   - Creates or updates a `deploy` branch with the built files
+   - Pushes the `deploy` branch to GitHub
+   - Returns to your original branch
+
+4. **Benefits of This Approach:**
+   - **Local Building**: Builds happen on your machine, making debugging easier
+   - **Faster Deployments**: Server receives only the built files
+   - **Greater Transparency**: Easy to inspect exactly what's being deployed
+   - **Error Handling**: Robust error detection with helpful messages
+   - **Branch Safety**: Always returns to your starting branch
+
+5. **Customization:**
+   - The script is well-commented and can be modified to fit specific project needs
+   - Color-coded output makes it easy to follow the deployment process
 
 ---
 
