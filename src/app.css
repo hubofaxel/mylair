@@ -1,0 +1,243 @@
+@import "tailwindcss";
+
+/*
+ * Axel's Lab — Design Tokens
+ * Arctic Workshop aesthetic: deep space backgrounds, aurora accents, workshop warmth.
+ */
+
+@theme {
+	/* Backgrounds */
+	--color-bg: #0b0e14;
+	--color-bg-raised: #111621;
+	--color-bg-card: #161c2a;
+	--color-bg-card-hover: #1b2234;
+	--color-border: rgba(255, 255, 255, 0.07);
+	--color-border-hover: rgba(255, 255, 255, 0.14);
+
+	/* Text */
+	--color-text: rgba(255, 255, 255, 0.92);
+	--color-text-muted: rgba(255, 255, 255, 0.5);
+	--color-text-faint: rgba(255, 255, 255, 0.3);
+
+	/* Brand */
+	--color-primary: #22d3a7;
+	--color-primary-hover: #34eabd;
+	--color-primary-muted: rgba(34, 211, 167, 0.12);
+	--color-secondary: #a78bfa;
+	--color-secondary-muted: rgba(167, 139, 250, 0.12);
+	--color-accent: #f59e0b;
+	--color-accent-blue: #60a5fa;
+	--color-accent-green: #4ade80;
+	--color-accent-red: #f87171;
+
+	/* Typography */
+	--font-display: "Bricolage Grotesque", system-ui, sans-serif;
+	--font-sans: "Instrument Sans", system-ui, sans-serif;
+
+	/* Spacing */
+	--spacing-page: clamp(1.25rem, 5vw, 2.5rem);
+	--spacing-section: clamp(2.5rem, 8vw, 5rem);
+
+	/* Layout */
+	--width-content: 1080px;
+	--width-narrow: 720px;
+
+	/* Radius */
+	--radius-sm: 6px;
+	--radius-md: 10px;
+	--radius-lg: 16px;
+	--radius-xl: 24px;
+
+	/* Easing */
+	--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+	--ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ─── Base ─── */
+
+html {
+	background-color: var(--color-bg);
+	color: var(--color-text);
+	font-family: var(--font-sans);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+}
+
+/* ─── Typography ─── */
+
+h1,
+h2,
+h3,
+h4 {
+	font-family: var(--font-display);
+	letter-spacing: -0.02em;
+}
+
+/* ─── Focus ─── */
+
+:focus-visible {
+	outline: 2px solid var(--color-primary);
+	outline-offset: 2px;
+}
+
+/* ─── Skip link ─── */
+
+.skip-link {
+	position: absolute;
+	top: -100%;
+	left: 1rem;
+	background: var(--color-primary);
+	color: var(--color-bg);
+	padding: 0.5rem 1rem;
+	border-radius: var(--radius-sm);
+	font-weight: 600;
+	z-index: 200;
+	transition: top 0.15s;
+}
+
+.skip-link:focus {
+	top: 1rem;
+}
+
+/* ─── Grain overlay ─── */
+
+.grain::after {
+	content: "";
+	position: fixed;
+	inset: 0;
+	z-index: 9999;
+	pointer-events: none;
+	opacity: 0.025;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+	background-repeat: repeat;
+	background-size: 256px 256px;
+}
+
+/* ─── Animations ─── */
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes slide-up {
+	from {
+		opacity: 0;
+		transform: translateY(16px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes slide-down {
+	from {
+		opacity: 0;
+		transform: translateY(-8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes scale-in {
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes pulse-glow {
+	0%,
+	100% {
+		opacity: 0.15;
+	}
+	50% {
+		opacity: 0.25;
+	}
+}
+
+.animate-fade-in {
+	animation: fade-in 0.6s var(--ease-out-expo) both;
+}
+
+.animate-slide-up {
+	animation: slide-up 0.7s var(--ease-out-expo) both;
+}
+
+.animate-slide-down {
+	animation: slide-down 0.5s var(--ease-out-expo) both;
+}
+
+.animate-scale-in {
+	animation: scale-in 0.5s var(--ease-out-expo) both;
+}
+
+/* Stagger delays */
+.delay-1 {
+	animation-delay: 0.1s;
+}
+.delay-2 {
+	animation-delay: 0.2s;
+}
+.delay-3 {
+	animation-delay: 0.3s;
+}
+.delay-4 {
+	animation-delay: 0.4s;
+}
+.delay-5 {
+	animation-delay: 0.5s;
+}
+
+/* ─── Banner scene ─── */
+
+.banner-scene {
+	background:
+		radial-gradient(ellipse at 35% 60%, rgba(34, 211, 167, 0.08) 0%, transparent 55%),
+		radial-gradient(ellipse at 70% 40%, rgba(96, 165, 250, 0.06) 0%, transparent 50%),
+		radial-gradient(ellipse at 50% 50%, rgba(167, 139, 250, 0.04) 0%, transparent 60%),
+		var(--color-bg);
+}
+
+.banner-scene::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	opacity: 0.35;
+	background-image:
+		radial-gradient(1px 1px at 15% 25%, rgba(255, 255, 255, 0.6), transparent),
+		radial-gradient(1px 1px at 40% 65%, rgba(255, 255, 255, 0.5), transparent),
+		radial-gradient(1px 1px at 70% 15%, rgba(255, 255, 255, 0.7), transparent),
+		radial-gradient(1px 1px at 85% 55%, rgba(255, 255, 255, 0.4), transparent),
+		radial-gradient(1px 1px at 25% 80%, rgba(255, 255, 255, 0.5), transparent),
+		radial-gradient(1px 1px at 55% 35%, rgba(255, 255, 255, 0.6), transparent),
+		radial-gradient(1px 1px at 90% 80%, rgba(255, 255, 255, 0.3), transparent),
+		radial-gradient(1px 1px at 10% 50%, rgba(255, 255, 255, 0.4), transparent),
+		radial-gradient(1.5px 1.5px at 60% 75%, rgba(96, 165, 250, 0.8), transparent),
+		radial-gradient(1.5px 1.5px at 30% 10%, rgba(34, 211, 167, 0.6), transparent);
+	background-size: 100% 100%;
+	pointer-events: none;
+}
+
+/* ─── Selection ─── */
+
+::selection {
+	background: var(--color-primary);
+	color: var(--color-bg);
+}
