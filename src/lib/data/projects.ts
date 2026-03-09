@@ -1,5 +1,5 @@
 export type ProjectStatus = 'in-progress' | 'complete' | 'planned';
-export type ProjectCategory = 'coding' | 'science';
+export type ProjectCategory = 'coding' | 'science' | 'writing';
 
 export interface Project {
 	slug: string;
@@ -31,7 +31,7 @@ export const projects: Project[] = [
 		description:
 			'A web-first arcade shooter with pixel art graphics, AI-generated sprites and audio, and data-driven gameplay. Play in the browser or install as a PWA. Built with a modern monorepo stack: SvelteKit for the app shell, Phaser 4 for the game engine, and Zod schemas for all game content.',
 		tech: ['Phaser 4', 'SvelteKit', 'Svelte 5', 'Zod 4', 'TypeScript'],
-		link: null,
+		link: 'https://hubofaxel.github.io/sg/',
 		highlights: [
 			'Pixel art sprites generated with AI and hand-tuned',
 			'Sound effects and music via ElevenLabs',
@@ -40,50 +40,59 @@ export const projects: Project[] = [
 		],
 	},
 	{
-		slug: 'chemistry-fun',
-		title: 'Chemistry Fun',
-		category: 'science',
-		status: 'complete',
+		slug: 'next-project-1',
+		title: 'What Should I Build?',
+		category: 'coding',
+		status: 'planned',
 		featured: false,
 		icon: null,
-		iconEmoji: '\u{1F9EA}',
+		iconEmoji: '\u{1F4A1}',
 		banner: null,
-		summary: 'Testing reactions with household materials.',
+		summary: 'Got an idea? This slot is waiting for the next project.',
 		description:
-			'Exploring chemical reactions using safe, everyday materials found around the house. Documenting color changes, gas production, and temperature shifts to understand the science behind common substances.',
+			'This is an open slot for whatever comes next. Could be a game, a tool, a robot, an experiment — anything. The best projects start with a spark of curiosity.',
 		tech: [],
 		link: null,
-		highlights: [
-			'Baking soda and vinegar volcano variations',
-			'Cabbage juice pH indicator experiments',
-			'Crystal growing with sugar and borax',
-		],
+		highlights: [],
 	},
 	{
-		slug: 'backyard-astronomy',
-		title: 'Backyard Astronomy',
+		slug: 'next-project-2',
+		title: 'Another Idea Goes Here',
 		category: 'science',
-		status: 'in-progress',
+		status: 'planned',
 		featured: false,
 		icon: null,
-		iconEmoji: '\u{1F52D}',
+		iconEmoji: '\u{1F680}',
 		banner: null,
-		summary: 'Observations of night sky phenomena.',
+		summary: 'Room for one more. What will it be?',
 		description:
-			'Stargazing and documenting celestial events. Long winter nights and low light pollution make for great conditions to observe planets, meteor showers, and the northern lights.',
+			'Another open slot waiting for inspiration to strike. Maybe something with hardware, maybe something creative — the lab is always ready for new experiments.',
 		tech: [],
 		link: null,
-		highlights: [
-			'Northern lights photography and tracking',
-			'Planet identification through the seasons',
-			'Meteor shower observation logs',
-		],
+		highlights: [],
+	},
+	{
+		slug: 'next-project-3',
+		title: 'Something Worth Writing About',
+		category: 'writing',
+		status: 'planned',
+		featured: false,
+		icon: null,
+		iconEmoji: '\u{270F}\u{FE0F}',
+		banner: null,
+		summary: 'A story, a report, a deep dive — this spot is reserved for words.',
+		description:
+			'An open slot for a writing or research project. Could be a field guide, a mini documentary script, a deep-dive report on something interesting, or just a really good story. Words matter.',
+		tech: [],
+		link: null,
+		highlights: [],
 	},
 ];
 
 export const categories: Record<ProjectCategory, { label: string; color: string }> = {
 	coding: { label: 'Coding', color: 'var(--color-accent-blue)' },
 	science: { label: 'Science', color: 'var(--color-accent-green)' },
+	writing: { label: 'Writing', color: 'var(--color-secondary)' },
 };
 
 export const statusLabels: Record<ProjectStatus, string> = {
