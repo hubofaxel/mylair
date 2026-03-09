@@ -1,3 +1,7 @@
+<script lang="ts">
+import { base } from '$app/paths';
+</script>
+
 <section
 	class="relative mb-(--spacing-section) overflow-hidden rounded-(--radius-xl) border border-(--color-border) bg-(--color-bg-raised) px-8 py-16 md:px-12 md:py-24"
 	aria-labelledby="hero-heading"
@@ -30,7 +34,7 @@
 
 		<div class="animate-slide-up delay-3 mt-8 flex flex-wrap gap-3">
 			<a
-				href="/projects"
+				href="{base}/projects"
 				class="inline-flex items-center gap-2 rounded-(--radius-md) bg-(--color-primary) px-5 py-2.5 text-sm font-bold text-(--color-bg) transition-all duration-300 hover:brightness-110 hover:shadow-[0_0_24px_rgba(34,211,167,0.3)]"
 			>
 				View Projects
@@ -39,7 +43,7 @@
 				</svg>
 			</a>
 			<a
-				href="/about"
+				href="{base}/about"
 				class="inline-flex items-center rounded-(--radius-md) border border-(--color-border) bg-white/5 px-5 py-2.5 text-sm font-semibold text-(--color-text) transition-colors hover:border-(--color-border-hover) hover:bg-white/8"
 			>
 				About Me

@@ -1,4 +1,5 @@
 <script lang="ts">
+import { base } from '$app/paths';
 import { categories, type Project, statusLabels } from '$data/projects';
 
 interface Props {
@@ -29,7 +30,7 @@ const statusText = $derived(statusLabels[project.status]);
 	{#if featured && project.banner}
 		<div class="banner-scene relative aspect-[2/1] w-full overflow-hidden">
 			<img
-				src={project.banner}
+				src="{base}{project.banner}"
 				alt="{project.title} screenshot"
 				loading="lazy"
 				class="relative z-[1] h-full w-full scale-[1.35] object-contain object-center transition-transform duration-500 ease-(--ease-out-expo) [image-rendering:pixelated] group-hover:scale-[1.4]"
@@ -42,7 +43,7 @@ const statusText = $derived(statusLabels[project.status]);
 		<div class="mb-3 flex items-start gap-3">
 			{#if project.icon}
 				<img
-					src={project.icon}
+					src="{base}{project.icon}"
 					alt=""
 					class="shrink-0 rounded-(--radius-md) [image-rendering:pixelated]
 						{featured ? 'h-14 w-14' : 'h-12 w-12'}"
@@ -109,7 +110,7 @@ const statusText = $derived(statusLabels[project.status]);
 
 		<div class="mt-5 flex flex-wrap gap-3">
 			<a
-				href="/projects/{project.slug}"
+				href="{base}/projects/{project.slug}"
 				class="inline-flex items-center gap-1.5 rounded-(--radius-md) bg-white/6 px-4 py-2 text-sm font-semibold text-(--color-text) transition-colors hover:bg-white/12"
 			>
 				Details

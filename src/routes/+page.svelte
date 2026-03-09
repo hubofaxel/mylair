@@ -1,4 +1,5 @@
 <script lang="ts">
+import { base } from '$app/paths';
 import Hero from '$components/Hero.svelte';
 import ProjectCard from '$components/ProjectCard.svelte';
 import { getFeaturedProjects, getNonFeaturedProjects } from '$data/projects';
@@ -33,7 +34,7 @@ const others = getNonFeaturedProjects();
 		<h2 id="projects-heading" class="font-display text-xl font-bold tracking-tight">All Projects</h2>
 		<div class="h-px flex-1 bg-(--color-border)"></div>
 		<a
-			href="/projects"
+			href="{base}/projects"
 			class="text-sm font-medium text-(--color-text-muted) transition-colors hover:text-(--color-primary)"
 		>
 			View all

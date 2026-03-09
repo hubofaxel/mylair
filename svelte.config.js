@@ -6,10 +6,13 @@ const config = {
 		adapter: adapter({
 			pages: 'dist',
 			assets: 'dist',
-			fallback: '404.html',
+			fallback: undefined,
 			precompress: true,
 			strict: true,
 		}),
+		paths: {
+			base: process.env.BASE_PATH || '',
+		},
 		alias: {
 			$components: 'src/lib/components',
 			$data: 'src/lib/data',

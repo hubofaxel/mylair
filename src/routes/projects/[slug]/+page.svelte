@@ -1,4 +1,5 @@
 <script lang="ts">
+import { base } from '$app/paths';
 import { categories, statusLabels } from '$data/projects';
 
 let { data } = $props();
@@ -14,7 +15,7 @@ const statusText = $derived(statusLabels[project.status]);
 
 <article class="mx-auto max-w-(--width-narrow)">
 	<a
-		href="/projects"
+		href="{base}/projects"
 		class="animate-fade-in group mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-(--color-text-muted) transition-colors hover:text-(--color-primary)"
 	>
 		<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="transition-transform duration-200 group-hover:-translate-x-0.5">
@@ -29,7 +30,7 @@ const statusText = $derived(statusLabels[project.status]);
 		>
 			<div class="aspect-[2/1] w-full overflow-hidden">
 				<img
-					src={project.banner}
+					src="{base}{project.banner}"
 					alt="{project.title} screenshot"
 					class="relative z-[1] h-full w-full scale-[1.35] object-contain object-center [image-rendering:pixelated]"
 					loading="lazy"

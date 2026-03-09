@@ -1,4 +1,5 @@
 <script lang="ts">
+import { base } from '$app/paths';
 import { page } from '$app/state';
 
 const nav = [
@@ -10,8 +11,10 @@ const nav = [
 let menuOpen = $state(false);
 
 function isActive(href: string): boolean {
-	if (href === '/') return page.url.pathname === '/';
-	return page.url.pathname.startsWith(href);
+	const path = page.url.pathname;
+	const full = base + href;
+	if (href === '/') return path === base || path === base + '/';
+	return path.startsWith(full);
 }
 
 function closeMenu() {
@@ -27,7 +30,7 @@ function closeMenu() {
 	>
 		<!-- Logo -->
 		<a
-			href="/"
+			href="{base}/"
 			class="group flex items-center gap-2.5 font-display text-lg font-bold tracking-tight text-(--color-text) transition-colors hover:text-(--color-primary)"
 			onclick={closeMenu}
 		>
@@ -81,7 +84,7 @@ function closeMenu() {
 		<nav class="hidden items-center gap-1 sm:flex" aria-label="Main navigation">
 			{#each nav as { href, label }}
 				<a
-					{href}
+					href="{base}{href}"
 					class="relative rounded-(--radius-sm) px-3.5 py-2 text-sm font-medium transition-colors
 						{isActive(href)
 						? 'text-(--color-primary)'
@@ -137,7 +140,7 @@ function closeMenu() {
 	>
 		{#each nav as { href, label }, i}
 			<a
-				{href}
+				href="{base}{href}"
 				onclick={closeMenu}
 				class="animate-slide-up rounded-(--radius-md) px-8 py-4 text-2xl font-bold font-display tracking-tight transition-colors
 					{isActive(href)
