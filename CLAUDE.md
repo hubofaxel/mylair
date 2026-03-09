@@ -2,9 +2,11 @@
 
 Axel's Lab — personal portfolio site. SvelteKit + Svelte 5 + Tailwind 4 + TypeScript, statically generated.
 
+**Live**: https://hubofaxel.github.io/mylair/
+
 ## Commands
 
-- `pnpm dev` — SvelteKit dev server
+- `pnpm dev` — local dev server
 - `pnpm build` — static build to dist/
 - `pnpm preview` — preview production build
 - `pnpm check` — TypeScript + Svelte type checking
@@ -23,7 +25,19 @@ Axel's Lab — personal portfolio site. SvelteKit + Svelte 5 + Tailwind 4 + Type
 | Output | Static site (adapter-static) |
 | Formatter/Linter | Biome 2.4 (NOT Prettier, NOT ESLint) |
 | Package manager | pnpm |
-| Deployment | GitHub Actions to /var/www/kidsites/axel |
+| Deployment | GitHub Pages via Actions |
+
+## Deployment
+
+Push to `main` triggers `.github/workflows/deploy.yml`:
+1. pnpm install + `BASE_PATH=/mylair pnpm build`
+2. Upload dist/ as GitHub Pages artifact
+3. Deploy to https://hubofaxel.github.io/mylair/
+
+**Base path**: The site runs at `/mylair/` subpath. `svelte.config.js` reads `BASE_PATH` env var.
+- All internal links must use `{base}` from `$app/paths` (e.g., `href="{base}/projects"`)
+- All image `src` from data must use `{base}` prefix (e.g., `src="{base}{project.icon}"`)
+- Local dev has no base path — `BASE_PATH` is only set in the CI workflow
 
 ## Rules
 
@@ -44,23 +58,19 @@ Axel's Lab — personal portfolio site. SvelteKit + Svelte 5 + Tailwind 4 + Type
 mylair/
 ├── src/
 │   ├── app.html          # Root HTML template
-│   ├── app.css           # Tailwind entry + design tokens
+│   ├── app.css           # Tailwind entry + @theme design tokens
 │   ├── app.d.ts          # TypeScript app types
 │   ├── lib/
-│   │   ├── components/   # Svelte 5 components
-│   │   └── data/         # Typed data (projects, etc.)
+│   │   ├── components/   # Svelte 5 components ($components alias)
+│   │   └── data/         # Typed data modules ($data alias)
 │   └── routes/
 │       ├── +layout.svelte    # Root layout (header, footer)
+│       ├── +layout.ts        # prerender = true
 │       ├── +page.svelte      # Home page
 │       ├── projects/         # Projects list + [slug] detail
 │       └── about/            # About page
-├── static/               # Static assets (images, SVGs) — served from /
+├── static/               # Static assets (images, SVGs, .nojekyll)
 ├── .claude/              # Claude Code config (settings, hooks, agents)
+├── .github/workflows/    # GitHub Pages deploy workflow
 └── dist/                 # Build output (gitignored)
 ```
-
-## Deployment
-
-Push to `main` triggers GitHub Actions workflow:
-1. pnpm install + pnpm build
-2. Deploy dist/ to remote server via kids-deploy-actions
